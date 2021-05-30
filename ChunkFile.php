@@ -248,11 +248,11 @@ class UploadFile
             $chunk_filename = $saveDir . '/' . $chunk_start . '_' . $chunk_end;
 
             if (file_exists($chunk_filename)) {
-                if ($overWrite) {
-                    // 覆盖直接删除原文件
-                    unlink($chunk_filename);
+                if (!$overWrite) {
+                    continue;
                 }
-                continue;
+                // 覆盖直接删除原文件
+                unlink($chunk_filename);
             };
 
             file_put_contents($chunk_filename, $data);
