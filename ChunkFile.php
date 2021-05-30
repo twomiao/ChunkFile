@@ -126,7 +126,7 @@ class UploadFile
      */
     protected $saveFile;
 
-    protected static $mimeType = [
+    protected const MIME_TYPE = [
         'application/x-dosexec' => '.exe'
     ];
 
@@ -175,8 +175,8 @@ class UploadFile
     private static function getMimeType($file)
     {
         $mime = mime_content_type($file);
-        if (isset(self::$mimeType[$mime])) {
-            return $value = self::$mimeType[$mime];
+        if (isset(static::MIME_TYPE[$mime])) {
+            return $value = self::MIME_TYPE[$mime];
         }
         throw new \RuntimeException('Unrecognized file suffix.');
     }
@@ -264,9 +264,9 @@ class UploadFile
     }
 }
 
-$file = __DIR__ . '/QQMusicSetup.exe';
+$file = dirname(__DIR__) . '/QQMusicSetup.exe';
 
-$new_file = __DIR__;
+$new_file = __DIR__.'/../';
 
 $uploadFile = new UploadFile($file, $new_file);
 $uploadFile->setSingleChunkSize(5); // 5 MB
